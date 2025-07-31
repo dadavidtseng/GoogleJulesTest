@@ -1,14 +1,7 @@
-use image::GenericImageView;
+use image::{DynamicImage, GenericImageView};
 use windows::{
     core::*,
     Win32::Foundation::*,
-};
-
-#[repr(C)]
-struct Vertex {
-    pos: [f32; 3],
-    tex: [f32; 2],
-}
     Win32::Graphics::Direct3D::*,
     Win32::Graphics::Direct3D11::*,
     Win32::Graphics::Dxgi::Common::*,
@@ -16,6 +9,12 @@ struct Vertex {
     Win32::System::LibraryLoader::GetModuleHandleW,
     Win32::UI::WindowsAndMessaging::*,
 };
+
+#[repr(C)]
+struct Vertex {
+    pos: [f32; 3],
+    tex: [f32; 2],
+}
 
 struct D3D11State {
     device: ID3D11Device,
@@ -104,8 +103,6 @@ fn main() -> Result<()> {
         Ok(())
     }
 }
-
-use image::DynamicImage;
 
 fn init_d3d(hwnd: HWND, img: &DynamicImage) -> Result<D3D11State> {
     unsafe {
